@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide Me Button – Pulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f4ff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Wrapper holds the button + the pulse rings */
+    .guide-me-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes pulse-shadow {
+      0%   { box-shadow: 0 0 0 0px rgba(99, 143, 243, 0.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(99, 143, 243, 0); }
+      100% { box-shadow: 0 0 0 14px rgba(99, 143, 243, 0); }
+    }
+
+    /* The button itself */
+    .guide-me-btn {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 189px;
+      height: 48px;
+      border-radius: 40px;
+      background: #638ff3;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      animation: pulse-shadow 2s ease-out infinite;
+    }
+
+    .guide-me-btn:hover {
+      background: #4f7ce8;
+    }
+
+    .guide-me-btn:active {
+      background: #3b69d4;
+      transform: scale(0.98);
+    }
+
+    /* Discover / sparkle icon inline SVG */
+    .guide-me-btn svg {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="guide-me-wrapper">
+    <button class="guide-me-btn">
+      <!-- Sparkle / discover icon matching the Figma asset -->
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="white" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
+      </svg>
+      Guide Me
+    </button>
+  </div>
+
+</body>
+</html>
