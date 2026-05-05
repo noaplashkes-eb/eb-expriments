@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agreement Summary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+      min-height: 100vh;
+    }
+
+    /* ── Pulse animation ── */
+    @keyframes pulse-shadow {
+      0%   { box-shadow: 0 0 0 0px rgba(118, 157, 248, 0.55); }
+      70%  { box-shadow: 0 0 0 14px rgba(118, 157, 248, 0); }
+      100% { box-shadow: 0 0 0 14px rgba(118, 157, 248, 0); }
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: #00174d;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+    }
+
+    .navbar-actions { display: flex; align-items: center; gap: 28px; }
+
+    .btn-outline-white {
+      border: 1px solid white;
+      border-radius: 40px;
+      height: 40px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      cursor: pointer;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .btn-ghost-white {
+      background: transparent;
+      border: none;
+      height: 40px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .user-account { display: flex; align-items: center; gap: 8px; padding: 4px; }
+
+    .user-avatar {
+      width: 32px; height: 32px;
+      background: #bacefc;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 14px; color: #00174d;
+      flex-shrink: 0;
+    }
+
+    .user-name { font-weight: 600; font-size: 16px; color: #f8f9fa; }
+
+    /* ── Breadcrumb ── */
+    .breadcrumb {
+      background: white;
+      border-bottom: 1px solid #e0e8f0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .breadcrumb span {
+      font-size: 14px;
+      color: #62748e;
+      line-height: 22px;
+    }
+
+    .breadcrumb strong { font-weight: 600; }
+
+    .back-icon { transform: rotate(180deg); width: 20px; height: 20px; }
+
+    /* ── Layout ── */
+    .page-layout {
+      max-width: 1132px;
+      margin: 0 auto;
+      padding: 64px 48px 80px;
+      display: flex;
+      gap: 0;
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      width: 268px;
+      flex-shrink: 0;
+      border-right: 1px solid #c1d1e1;
+      padding-right: 32px;
+    }
+
+    .sidebar-title {
+      font-weight: 600;
+      font-size: 16px;
+      color: #45556c;
+      line-height: 24px;
+      margin-bottom: 20px;
+    }
+
+    .step { display: flex; gap: 12px; }
+
+    .step-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .step-circle {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 14px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-circle.done   { background: #2eb26a; color: white; }
+    .step-circle.active { background: #2eb26a; color: white; }
+    .step-circle.idle   { background: #e0e8f0; color: #62748e; }
+
+    .step-line {
+      width: 2px;
+      flex: 1;
+      min-height: 16px;
+    }
+
+    .step-line.solid  { background: #c1d1e1; }
+    .step-line.dashed {
+      background: repeating-linear-gradient(
+        to bottom, #c1d1e1 0 4px, transparent 4px 8px
+      );
+    }
+
+    .step-body { padding-top: 8px; padding-bottom: 16px; flex: 1; }
+
+    .step-name { font-size: 14px; line-height: 20px; }
+    .step-name.done,
+    .step-name.active { font-weight: 600; color: #45556c; }
+    .step-name.idle   { font-weight: 600; color: #62748e; }
+
+    .sub-steps { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+
+    .sub-step { font-size: 14px; line-height: 22px; font-weight: 400; }
+    .sub-step.active   { color: #45556c; }
+    .sub-step.inactive { color: #62748e; }
+
+    /* ── Main ── */
+    .main {
+      flex: 1;
+      padding-left: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 64px;
+    }
+
+    .section { display: flex; flex-direction: column; gap: 24px; }
+
+    .row-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    h1 { font-weight: 600; font-size: 24px; line-height: 32px; color: #00174d; }
+    h2 { font-weight: 600; font-size: 24px; line-height: 32px; color: #00174d; }
+    h3 { font-weight: 600; font-size: 18px; line-height: 26px; color: #00174d; }
+
+    .body-text {
+      font-size: 16px;
+      line-height: 26px;
+      color: #45556c;
+    }
+
+    .body-text .medium { font-weight: 500; }
+
+    /* ── Guide Me button ── */
+    .guide-me {
+      background: #769df8;
+      border: none;
+      border-radius: 40px;
+      height: 48px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      animation: pulse-shadow 2s ease-out infinite;
+    }
+
+    .guide-me img { width: 24px; height: 24px; }
+
+    /* ── Card ── */
+    .card {
+      background: white;
+      border: 1px solid #c1d1e1;
+      border-radius: 8px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .divider { height: 1px; background: #e0e8f0; }
+
+    /* Target Funding row */
+    .offer-row { display: flex; align-items: flex-start; justify-content: space-between; }
+
+    .offer-left { display: flex; gap: 8px; align-items: flex-start; }
+
+    .offer-icon { width: 48px; height: 48px; flex-shrink: 0; }
+    .offer-icon img { width: 100%; height: 100%; display: block; }
+
+    .offer-title { font-weight: 600; font-size: 18px; line-height: 26px; color: #00174d; }
+
+    .offer-sub {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 12px; line-height: 20px; color: #62748e;
+    }
+
+    .offer-sub .link { font-weight: 600; color: #00174d; }
+
+    .offer-value { text-align: right; padding: 12px; border-radius: 6px; }
+    .offer-amount { font-weight: 600; font-size: 18px; line-height: 26px; color: #00174d; }
+    .offer-qty { font-family: 'Noto Sans', sans-serif; font-size: 12px; line-height: 20px; color: #62748e; }
+
+    /* Future Cut chart */
+    .future-cut { display: flex; flex-direction: column; gap: 16px; }
+
+    .cut-info { display: flex; gap: 16px; align-items: flex-start; }
+
+    .cut-chart {
+      display: flex;
+      width: 100%;
+      border-radius: 6px;
+      box-shadow: 0 0 4px rgba(0,23,77,0.12);
+      padding: 8px 0;
+    }
+
+    .cut-left {
+      width: 166px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .bar-investors {
+      border-bottom: 6px solid #bacefc;
+      padding-bottom: 16px;
+    }
+
+    .bar-you {
+      border-bottom: 6px solid #2eb26a;
+      padding-bottom: 16px;
+      text-align: right;
+    }
+
+    .cut-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-end;
+    }
+
+    .cut-pct { font-weight: 600; font-size: 18px; line-height: 26px; color: #00174d; }
+    .cut-lbl { font-weight: 600; font-size: 16px; line-height: 24px; color: #00174d; }
+
+    /* Numbered items */
+    .num-item { display: flex; align-items: center; gap: 16px; }
+
+    .num-badge {
+      width: 44px; height: 44px;
+      background: #e7eefe;
+      border-radius: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 600; font-size: 14px; color: #4178f6;
+      flex-shrink: 0;
+    }
+
+    .num-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .num-title { font-weight: 600; font-size: 16px; line-height: 24px; color: #00174d; }
+
+    .num-sub {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 12px; line-height: 20px; color: #62748e;
+    }
+
+    .num-val { font-weight: 600; font-size: 16px; line-height: 24px; color: #00174d; }
+
+    .plus-row {
+      display: flex; align-items: center; gap: 0;
+    }
+
+    .plus-line { flex: 1; height: 1px; background: #e0e8f0; }
+
+    .plus-label {
+      font-weight: 600; font-size: 14px; color: #009f4d;
+      padding: 0 16px;
+    }
+
+    .disclaimer { font-size: 14px; line-height: 22px; color: #62748e; }
+
+    /* Simulator CTA */
+    .sim-cta {
+      background: #e7eefe;
+      border: 1px solid #769df8;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      cursor: pointer;
+    }
+
+    .sim-cta img { width: 45px; height: 48px; flex-shrink: 0; }
+
+    .sim-cta-text {
+      font-weight: 600; font-size: 16px; line-height: 24px; color: #323bb3;
+    }
+
+    /* ── Tour Modal ── */
+    .tour-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 23, 77, 0.35);
+      z-index: 100;
+    }
+
+    .tour-overlay.open { display: block; }
+
+    .tour-panel {
+      position: absolute;
+      bottom: 48px;
+      right: calc((100vw - 1132px) / 2 + 48px);
+      width: 380px;
+      background: #1e2266;
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    }
+
+    .tour-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .tour-counter {
+      font-weight: 600;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.5px;
+    }
+
+    .tour-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-size: 20px;
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.15s;
+    }
+
+    .tour-close:hover { background: rgba(255,255,255,0.1); }
+
+    .tour-title {
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 28px;
+      color: white;
+    }
+
+    .tour-title strong { font-weight: 700; }
+
+    .tour-intro {
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .tour-steps {
+      list-style: decimal;
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+    }
+
+    .tour-step {
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(255,255,255,0.85);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .tour-step.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tour-footer-text {
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(255,255,255,0.85);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .tour-footer-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tour-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .tour-prev {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 4px;
+      transition: color 0.15s;
+    }
+
+    .tour-prev:hover { color: white; }
+
+    .tour-next {
+      background: #769df8;
+      border: none;
+      border-radius: 40px;
+      height: 44px;
+      padding: 0 24px;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+
+    .tour-next:hover { background: #8aacfa; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <img src="http://localhost:3845/assets/7e9bd87725bfd5bfe510d154bca3b05962861585.svg" alt="Equitybee" width="35" height="31" />
+    <div class="navbar-actions">
+      <button class="btn-outline-white">
+        <img src="http://localhost:3845/assets/ee38f4bb712e1a8c8c3b6ab9e82d58655da6d140.svg" alt="" width="20" height="20" />
+        Liquidity Simulator
+      </button>
+      <button class="btn-ghost-white">Help Center</button>
+      <div class="user-account">
+        <div class="user-avatar">AY</div>
+        <span class="user-name">Adi Y</span>
+        <img src="http://localhost:3845/assets/f266cfa8be9adbf081add8d6ca0db2d35ffe7972.svg" alt="" width="10" height="6" />
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <img class="back-icon" src="http://localhost:3845/assets/f331318e362006f596511b86d47f22dbb2ca810a.svg" alt="" width="20" height="20" />
+    <span>Portfolio / Company / <strong>Request Funds</strong></span>
+  </div>
+
+  <!-- Page -->
+  <div class="page-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Your Journey</div>
+
+      <!-- Step 1: Application -->
+      <div class="step">
+        <div class="step-col" style="min-height:80px;">
+          <div class="step-circle done">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
+              <path d="M1 6L5.5 10.5L15 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-line solid"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-name done">Application</div>
+        </div>
+      </div>
+
+      <!-- Step 2: Agreement -->
+      <div class="step">
+        <div class="step-col" style="min-height:130px;">
+          <div class="step-circle active">2</div>
+          <div class="step-line dashed"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-name active">Agreement</div>
+          <div class="sub-steps">
+            <span class="sub-step active">Review Offer</span>
+            <span class="sub-step inactive">Identity Verification</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Funding & Exercise -->
+      <div class="step">
+        <div class="step-col">
+          <div class="step-circle idle">3</div>
+        </div>
+        <div class="step-body">
+          <div class="step-name idle">Funding &amp; Exercise</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+
+      <!-- Header section -->
+      <div class="section">
+        <div class="row-between">
+          <h1>Agreement Summary</h1>
+          <button class="guide-me">
+            <img src="http://localhost:3845/assets/2e0459adfdb8725bf80868b09356aa473ff7b140.svg" alt="" />
+            Guide Me
+          </button>
+        </div>
+        <p class="body-text">
+          You have succefully completed your funding application. Based on the documents you provided, here is a brief overview of your agreement.
+          <br/><span class="medium">Once you've reviewed the agreement summary, schedule a call below to continue the funding process</span>
+        </p>
+      </div>
+
+      <!-- Review your offer -->
+      <div class="section">
+        <h2>Review your offer</h2>
+        <div class="card">
+
+          <!-- Target Funding -->
+          <div class="offer-row">
+            <div class="offer-left">
+              <div class="offer-icon"><img src="http://localhost:3845/assets/0da763e7b44ca5e9b6a43b9ef8069a50f15840b0.png" alt="" /></div>
+              <div>
+                <div class="offer-title">Target Funding</div>
+                <div class="offer-sub">Funding to exercise your stock options and associated taxes <span class="link"> Learn More &gt;</span></div>
+              </div>
+            </div>
+            <div class="offer-value">
+              <div class="offer-amount">$848,568.35</div>
+              <div class="offer-qty">83,997 Options</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Future Cut -->
+          <div class="future-cut">
+            <div class="cut-info">
+              <div class="offer-icon"><img src="http://localhost:3845/assets/7271ab7839f3f60f9a3f6f33f91c7d711d1d3438.png" alt="" /></div>
+              <div>
+                <div class="offer-title">Future Cut</div>
+                <div class="offer-sub">Your portion of the proceeds upon a successful exit*</div>
+              </div>
+            </div>
+            <div class="cut-chart">
+              <div class="cut-left">
+                <div class="bar-investors"><span class="cut-pct">20%</span></div>
+                <div class="cut-lbl">Investors</div>
+              </div>
+              <div class="cut-right">
+                <div class="bar-you" style="width:100%;"><span class="cut-pct">80%</span></div>
+                <div class="cut-lbl">You</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- How does it work -->
+      <div class="section">
+        <h3>How does it work?</h3>
+        <p class="body-text">We'll market your offer to our investor network in order to secure the Target Funding, with the aim of getting as much funding as possible based on the information and time constraints you have provided.</p>
+        <div class="card">
+
+          <div class="num-item">
+            <div class="num-badge">1st</div>
+            <div class="num-content">
+              <div>
+                <div class="num-title">Original Funding Amount</div>
+                <div class="num-sub">The funding obtained and 5% Placement Fee</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="num-val">$808,160.34</div>
+                <div class="num-sub">+$40,408.02</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="plus-row">
+            <div class="plus-line"></div>
+            <span class="plus-label">+ PLUS</span>
+            <div class="plus-line"></div>
+          </div>
+
+          <div class="num-item">
+            <div class="num-badge">2nd</div>
+            <div class="num-content">
+              <div>
+                <div class="num-title">Compound Annual Interest</div>
+                <div class="num-sub">On the funding amount and 5% Placement Fee</div>
+              </div>
+              <div class="num-val">4%</div>
+            </div>
+          </div>
+
+          <div class="plus-row">
+            <div class="plus-line"></div>
+            <span class="plus-label">+ PLUS</span>
+            <div class="plus-line"></div>
+          </div>
+
+          <div class="num-item">
+            <div class="num-badge">3rd</div>
+            <div class="num-content">
+              <div>
+                <div class="num-title">Investor Portion</div>
+                <div class="num-sub">20% of the total proceeds</div>
+              </div>
+              <div class="num-val">20%</div>
+            </div>
+          </div>
+
+          <p class="disclaimer">The 5% Placement Fee, which was paid to equitybee on your behalf on the funding stage, is returned to the investors with interest. An additional 5% Stock Appreciation Percentage is paid to equitybee on your portion of the proceeds.</p>
+
+          <div class="sim-cta">
+            <img src="http://localhost:3845/assets/df8e3f507e4b8b2724217fe9d6482f531790ef3f.svg" alt="" />
+            <span class="sim-cta-text">Try our Liquidity Simulator and explore different exit scenarios &gt;</span>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Tour Modal -->
+  <div class="tour-overlay" id="tourOverlay">
+    <div class="tour-panel">
+      <div class="tour-header">
+        <span class="tour-counter">2/ 5</span>
+        <button class="tour-close" id="tourClose">✕</button>
+      </div>
+
+      <p class="tour-title">
+        Repayment comes only from your share's proceeds, not your pocket –&nbsp;<strong>If shares end at zero, you don't pay anything.</strong>
+      </p>
+
+      <p class="tour-intro">
+        At a liquidity event, you repay investors from your share value - never out of pocket - In this order:
+      </p>
+
+      <ol class="tour-steps">
+        <li class="tour-step" id="step1">Funding amount + 5% Placement Fee · returned to investors - this is the total amount we raised for you.</li>
+        <li class="tour-step" id="step2">4% compounding annual interest - on the funding amount, accumulated until exit.</li>
+        <li class="tour-step" id="step3">20% Investor Portion - paid from the gross share value.</li>
+      </ol>
+
+      <p class="tour-footer-text" id="tourFooter">
+        Whatever's left is your profit (Equitybee earns a 5% Stock Appreciation Percentage on it.)<br/>
+        (Click next to simulate various scenarios and see the actual numbers.)
+      </p>
+
+      <div class="tour-nav">
+        <button class="tour-prev" id="tourPrev">‹ Previous</button>
+        <button class="tour-next" id="tourNext">Next ›</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay   = document.getElementById('tourOverlay');
+    const closeBtn  = document.getElementById('tourClose');
+    const prevBtn   = document.getElementById('tourPrev');
+    const nextBtn   = document.getElementById('tourNext');
+    const guideBtn  = document.querySelector('.guide-me');
+    const steps     = [
+      document.getElementById('step1'),
+      document.getElementById('step2'),
+      document.getElementById('step3'),
+    ];
+    const footer    = document.getElementById('tourFooter');
+
+    // sub-step index: 0 = none shown, 1/2/3 = steps revealed, 4 = footer shown
+    let subStep = 0;
+
+    function open() {
+      subStep = 0;
+      steps.forEach(s => s.classList.remove('visible'));
+      footer.classList.remove('visible');
+      prevBtn.style.visibility = 'hidden';
+      overlay.classList.add('open');
+    }
+
+    function reveal() {
+      if (subStep < steps.length) {
+        steps[subStep].classList.add('visible');
+        subStep++;
+      } else if (subStep === steps.length) {
+        footer.classList.add('visible');
+        subStep++;
+        nextBtn.textContent = 'Done ›';
+      } else {
+        overlay.classList.remove('open');
+      }
+      prevBtn.style.visibility = subStep > 0 ? 'visible' : 'hidden';
+    }
+
+    function rewind() {
+      if (subStep > steps.length) {
+        footer.classList.remove('visible');
+        subStep--;
+        nextBtn.textContent = 'Next ›';
+      } else if (subStep > 0) {
+        subStep--;
+        steps[subStep].classList.remove('visible');
+      }
+      prevBtn.style.visibility = subStep > 0 ? 'visible' : 'hidden';
+    }
+
+    guideBtn.addEventListener('click', open);
+    closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+    nextBtn.addEventListener('click', reveal);
+    prevBtn.addEventListener('click', rewind);
+
+    // close on overlay click (outside panel)
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.classList.remove('open');
+    });
+  </script>
+
+</body>
+</html>
