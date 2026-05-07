@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guided Tour — Walkthrough · Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="walkthrough-base.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="navbar-logo" aria-label="Equitybee">
+      <span class="logo-dot"></span>
+    </a>
+    <div class="navbar-actions">
+      <button class="btn-outline-white" type="button">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 4h14M3 10h10M3 16h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="15" cy="10" r="2" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        Liquidity Simulator
+      </button>
+      <button class="btn-ghost-white" type="button">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M7.5 7.5a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5M10 14h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        Help Center
+      </button>
+      <button class="user-account" type="button">
+        <span class="user-avatar">AY</span>
+        <span class="user-name">Adi Y</span>
+        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+          <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <svg class="back-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M12 4l-6 6 6 6" stroke="#62748e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span><a href="#">Portfolio</a> / <a href="#">Company</a> / <strong>Request Funds</strong></span>
+  </div>
+
+  <!-- Page -->
+  <div class="page-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-title">Your Journey</div>
+
+      <!-- Step 1: Application -->
+      <div class="step">
+        <div class="step-col" style="min-height:80px;">
+          <div class="step-circle done" aria-label="Completed">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true">
+              <path d="M1 6L5.5 10.5L15 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-line solid"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-name done">Application</div>
+        </div>
+      </div>
+
+      <!-- Step 2: Agreement (active) -->
+      <div class="step">
+        <div class="step-col" style="min-height:130px;">
+          <div class="step-circle active">2</div>
+          <div class="step-line dashed"></div>
+        </div>
+        <div class="step-body">
+          <div class="step-name active">Agreement</div>
+          <ul class="sub-steps">
+            <li class="sub-step active">Review Offer</li>
+            <li class="sub-step inactive">Identity Verification</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 3: Funding & Exercise -->
+      <div class="step">
+        <div class="step-col">
+          <div class="step-circle idle">3</div>
+        </div>
+        <div class="step-body">
+          <div class="step-name idle">Funding &amp; Exercise</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <!-- Header -->
+      <section class="section">
+        <div class="row-between">
+          <h1>Agreement Summary</h1>
+          <button class="guide-me" type="button" id="guideMeBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
+            </svg>
+            Guide Me
+          </button>
+        </div>
+        <p class="body-text">
+          You have succefully completed your funding application. Based on the documents you provided, here is a brief overview of your agreement.
+          <br/><span class="medium">Once you've reviewed the agreement summary, schedule a call below to continue the funding process</span>
+        </p>
+      </section>
+
+      <!-- Review your offer -->
+      <section class="section">
+        <h2>Review your offer</h2>
+        <div class="card">
+
+          <!-- Target Funding -->
+          <div class="offer-row">
+            <div class="offer-left">
+              <div class="offer-icon offer-icon-target" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="20" stroke="#4178f6" stroke-width="2"/>
+                  <circle cx="24" cy="24" r="13" stroke="#4178f6" stroke-width="2"/>
+                  <circle cx="24" cy="24" r="6" fill="#4178f6"/>
+                </svg>
+              </div>
+              <div>
+                <div class="offer-title">Target Funding</div>
+                <div class="offer-sub">Funding to exercise your stock options and associated taxes <a href="#" class="link">Learn More &gt;</a></div>
+              </div>
+            </div>
+            <div class="offer-value" data-tour-target="target-funding">
+              <div class="offer-amount">$848,568.35</div>
+              <div class="offer-qty">83,997 Options</div>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <!-- Future Cut -->
+          <div class="future-cut">
+            <div class="cut-info">
+              <div class="offer-icon offer-icon-cut" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                  <circle cx="24" cy="24" r="20" fill="#bacefc"/>
+                  <path d="M24 4 a20 20 0 0 1 20 20 L24 24 Z" fill="#2eb26a"/>
+                </svg>
+              </div>
+              <div>
+                <div class="offer-title">Future Cut</div>
+                <div class="offer-sub">Your portion of the proceeds upon a successful exit*</div>
+              </div>
+            </div>
+            <div class="cut-chart">
+              <div class="cut-pcts">
+                <div class="cut-pct">20%</div>
+                <div class="cut-pct">80%</div>
+              </div>
+              <div class="cut-bar">
+                <div class="cut-bar-fill cut-bar-investors" style="width:20%;"></div>
+                <div class="cut-bar-fill cut-bar-you" style="width:80%;"></div>
+              </div>
+              <div class="cut-labels">
+                <div class="cut-lbl">Investors</div>
+                <div class="cut-lbl">You</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- How does it work -->
+      <section class="section">
+        <h3>How does it work?</h3>
+        <p class="body-text">We'll market your offer to our investor network in order to secure the Target Funding, with the aim of getting as much funding as possible based on the information and time constraints you have provided.</p>
+        <div class="card" data-tour-target="how-it-works">
+
+          <div class="num-item">
+            <div class="num-badge">1<sup>st</sup></div>
+            <div class="num-content">
+              <div>
+                <div class="num-title">Original Funding Amount</div>
+                <div class="num-sub">The funding obtained and 5% Placement Fee</div>
+              </div>
+              <div class="num-right">
+                <div class="num-val">$808,160.34</div>
+                <div class="num-sub">+$40,408.02</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="plus-row">
+            <div class="plus-line"></div>
+            <span class="plus-label">+ PLUS</span>
+            <div class="plus-line"></div>
+          </div>
+
+          <div class="num-item">
+            <div class="num-badge">2<sup>nd</sup></div>
+            <div class="num-content">
+              <div>
+                <div class="num-title">Compound Annual Interest</div>
+                <div class="num-sub">On the funding amount and 5% Placement Fee</div>
+              </div>
+              <div class="num-val">4%</div>
+            </div>
+          </div>
+
+          <div class="plus-row">
+            <div class="plus-line"></div>
+            <span class="plus-label">+ PLUS</span>
+            <div class="plus-line"></div>
+          </div>
+
+          <div class="num-item">
+            <div class="num-badge">3<sup>rd</sup></div>
+            <div class="num-content">
+              <div>
+                <div class="num-title">Investor Portion</div>
+                <div class="num-sub">20% of the total proceeds</div>
+              </div>
+              <div class="num-val">20%</div>
+            </div>
+          </div>
+
+          <p class="disclaimer">The 5% Placement Fee, which was paid to equitybee on your behalf on the funding stage, is returned to the investors with interest. An additional 5% Stock Appreciation Percentage is paid to equitybee on your portion of the proceeds.</p>
+
+          <a href="#" class="sim-cta">
+            <svg width="45" height="48" viewBox="0 0 45 48" fill="none" aria-hidden="true">
+              <rect x="4" y="6" width="37" height="36" rx="4" fill="#769df8"/>
+              <rect x="9" y="11" width="27" height="8" rx="2" fill="#fff"/>
+              <circle cx="14" cy="26" r="2.5" fill="#fff"/>
+              <circle cx="22.5" cy="26" r="2.5" fill="#fff"/>
+              <circle cx="31" cy="26" r="2.5" fill="#fff"/>
+              <circle cx="14" cy="34" r="2.5" fill="#fff"/>
+              <circle cx="22.5" cy="34" r="2.5" fill="#fff"/>
+              <circle cx="31" cy="34" r="2.5" fill="#fff"/>
+            </svg>
+            <span class="sim-cta-text">Try our Liquidity Simulator and explore different exit scenarios &gt;</span>
+          </a>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Liquidity Simulator panel (slides in for step 3) -->
+  <aside class="liq-sim" id="liqSim" data-tour-target="simulator" aria-hidden="true">
+    <header class="liq-sim-header">
+      <button class="liq-sim-close" type="button" aria-label="Close simulator">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <h2 class="liq-sim-title">Liquidity Simulator</h2>
+    </header>
+    <div class="liq-sim-body">
+      <!-- Empty state (step 3) -->
+      <div class="liq-sim-state liq-sim-state--empty" id="liqSimStateEmpty">
+        <p class="liq-sim-intro">Exercising your stock options doesn't have to be confusing. We created this tool to help you understand potential outcomes when using Equitybee.</p>
+        <div class="liq-sim-card">
+          <div class="liq-sim-company">
+            <span class="liq-sim-company-logo" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
+              </svg>
+            </span>
+            <span class="liq-sim-company-name">Discord</span>
+          </div>
+          <div class="liq-sim-field">
+            <label>Number of Vested Options</label>
+            <input type="text" placeholder="10,000" />
+          </div>
+          <div class="liq-sim-field">
+            <label>Per Share</label>
+            <input type="text" placeholder="10,000" />
+            <p class="liq-sim-hint">The price indicates the exercise price of your options, along with expected taxes and a 5% placement fee.</p>
+          </div>
+          <button class="liq-sim-continue" type="button" disabled>Continue</button>
+          <div class="liq-sim-disclaimer">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="8" cy="8" r="7" stroke="#4178f6" stroke-width="1.4"/>
+              <path d="M8 5v.01M8 7v4" stroke="#4178f6" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+            <span>Calculations are hypothetical. Funding is not guaranteed.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Populated sample state (step 4) -->
+      <div class="liq-sim-state liq-sim-state--populated" id="liqSimStatePopulated" hidden>
+        <div class="liq-sim-card">
+          <div class="liq-sim-company">
+            <span class="liq-sim-company-logo" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
+              </svg>
+            </span>
+            <span class="liq-sim-company-name">Discord</span>
+          </div>
+
+          <div class="liq-sim-stats">
+            <div class="liq-sim-stat">
+              <div class="liq-sim-stat-value">143,280</div>
+              <div class="liq-sim-stat-label">Options</div>
+            </div>
+            <div class="liq-sim-stat">
+              <div class="liq-sim-stat-value">$5.37</div>
+              <div class="liq-sim-stat-label">Per Share</div>
+            </div>
+          </div>
+
+          <h3 class="liq-sim-section-title">Try out different exit scenarios</h3>
+
+          <div class="liq-sim-control">
+            <div class="liq-sim-control-header">
+              <span class="liq-sim-control-label">Future Share Price <span class="info-mark" aria-hidden="true">ⓘ</span></span>
+              <span class="liq-sim-badge">Higher at exit</span>
+            </div>
+            <div class="liq-sim-stepper">
+              <button type="button" class="stepper-btn" aria-label="Decrease">−</button>
+              <span class="stepper-value">$20.1</span>
+              <button type="button" class="stepper-btn" aria-label="Increase">+</button>
+            </div>
+          </div>
+
+          <div class="liq-sim-control">
+            <div class="liq-sim-control-header">
+              <span class="liq-sim-control-label">Time Until Exit <span class="info-mark" aria-hidden="true">ⓘ</span></span>
+              <span class="liq-sim-control-value">3 Years</span>
+            </div>
+            <div class="liq-sim-slider">
+              <div class="slider-track">
+                <div class="slider-fill" style="width: 22%"></div>
+                <div class="slider-thumb" style="left: 22%"></div>
+              </div>
+              <div class="slider-labels"><span>1</span><span>10</span></div>
+            </div>
+          </div>
+
+          <div class="liq-sim-control">
+            <div class="liq-sim-control-header">
+              <span class="liq-sim-control-label">% Proceeds to Investors <span class="info-mark" aria-hidden="true">ⓘ</span></span>
+              <span class="liq-sim-control-value">20%</span>
+            </div>
+            <div class="liq-sim-slider">
+              <div class="slider-track">
+                <div class="slider-fill" style="width: 37.5%"></div>
+                <div class="slider-thumb" style="left: 37.5%"></div>
+              </div>
+              <div class="slider-labels"><span>%5</span><span>%45</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="liq-sim-result">
+          <div class="liq-sim-result-label">Estimated Net Proceeds <span class="info-mark" aria-hidden="true">ⓘ</span></div>
+          <div class="liq-sim-result-value">$376,490</div>
+          <button class="liq-sim-result-btn" type="button">See Breakdown</button>
+          <div class="liq-sim-result-disclaimer">Calculations are hypothetical. Funding is not guaranteed.</div>
+        </div>
+      </div>
+
+      <!-- Waterfall breakdown state (step 5) -->
+      <div class="liq-sim-state liq-sim-state--breakdown" id="liqSimStateBreakdown" hidden>
+        <div class="liq-sim-card">
+          <div class="liq-sim-company">
+            <span class="liq-sim-company-logo" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z"/>
+              </svg>
+            </span>
+            <span class="liq-sim-company-name">Discord</span>
+          </div>
+
+          <div class="liq-sim-stats">
+            <div class="liq-sim-stat">
+              <div class="liq-sim-stat-value">143,280</div>
+              <div class="liq-sim-stat-label">Options</div>
+            </div>
+            <div class="liq-sim-stat">
+              <div class="liq-sim-stat-value">$5.37</div>
+              <div class="liq-sim-stat-label">Per Share</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="liq-sim-totalcard">
+          <div class="liq-sim-total-label">Total Stock Value</div>
+          <div class="liq-sim-total-value">$1,432,800</div>
+          <div class="liq-sim-donut" aria-hidden="true">
+            <div class="liq-sim-donut-hole"></div>
+          </div>
+        </div>
+
+        <div class="liq-sim-waterfall">
+          <div class="liq-sim-wf-header">
+            <span class="liq-sim-wf-header-title">Share price is higher at exit</span>
+            <span class="liq-sim-wf-header-actions">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 13l4-4 3 3 5-5" stroke="#2eb26a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M13 7h4v4" stroke="#2eb26a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <button type="button" class="liq-sim-wf-toggle" aria-label="Add">+</button>
+            </span>
+          </div>
+
+          <div class="liq-sim-wf-summary">
+            <span>Total Stock Value</span>
+            <span class="liq-sim-wf-summary-value">$1,432,800 <span class="liq-sim-wf-collapse">−</span></span>
+          </div>
+
+          <div class="liq-sim-wf-list">
+            <div class="liq-sim-wf-row" data-wf="funding">
+              <span class="liq-sim-wf-dot" style="background:#4178f6"></span>
+              <span class="liq-sim-wf-label">Funding Amount</span>
+              <span class="liq-sim-wf-value">- $732,720.27 ›</span>
+            </div>
+            <div class="liq-sim-wf-row" data-wf="placement">
+              <span class="liq-sim-wf-dot" style="background:#ec6f9d"></span>
+              <span class="liq-sim-wf-label">5% Placement Fee</span>
+              <span class="liq-sim-wf-value">- $36,636.01 ›</span>
+            </div>
+            <div class="liq-sim-wf-row" data-wf="interest">
+              <span class="liq-sim-wf-dot" style="background:#f4a261"></span>
+              <span class="liq-sim-wf-label">Annual Interest (%4)</span>
+              <span class="liq-sim-wf-value">- $96,064.9 ›</span>
+            </div>
+            <div class="liq-sim-wf-row" data-wf="investor">
+              <span class="liq-sim-wf-dot" style="background:#b19cd9"></span>
+              <span class="liq-sim-wf-label">Investor Portion (%28)</span>
+              <span class="liq-sim-wf-value">- $401,184 ›</span>
+            </div>
+            <div class="liq-sim-wf-row liq-sim-wf-row--final" data-wf="net" id="liqSimNetRow">
+              <span class="liq-sim-wf-dot" style="background:#2eb26a"></span>
+              <span class="liq-sim-wf-label">Estimated Net Proceeds</span>
+              <span class="liq-sim-wf-value liq-sim-wf-value--positive">+$157,885.06</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Guided Tour -->
+  <div class="tour" id="tour" hidden>
+    <div class="tour-overlay" id="tourOverlay"></div>
+
+    <div class="tour-tooltip" id="tourTooltip" data-arrow="up">
+      <header class="tour-tip-header">
+        <span class="tour-tip-counter"><span id="tourStepNum">1</span> / 5</span>
+        <button class="tour-tip-close" id="tourClose" type="button" aria-label="Close tour">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </header>
+
+      <h2 class="tour-tip-title" id="tourTitle">This is what we're raising for you</h2>
+
+      <div class="tour-tip-illustration" id="tourIllustration" hidden></div>
+
+      <div class="tour-tip-callout" id="tourCallout">
+        <span class="tour-tip-callout-value">$0</span>
+      </div>
+
+      <div class="tour-tip-body" id="tourBody">
+        <p><span class="tour-token">${exercise_cost}</span> - The amount needed to exercise your options, including taxes (we use a max estimate; if your actual bill is lower, you keep the difference as cash).</p>
+        <p>Once you are funded, you exercise the options yourself - same as if you'd used your own capital - and hold your shares until a future liquidity event.</p>
+      </div>
+
+      <footer class="tour-tip-footer">
+        <button class="tour-tip-prev" id="tourPrev" type="button" hidden>‹ Previous</button>
+        <button class="tour-tip-next" id="tourNext" type="button">
+          Next
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+  <script src="walkthrough-base.js"></script>
+</body>
+</html>
